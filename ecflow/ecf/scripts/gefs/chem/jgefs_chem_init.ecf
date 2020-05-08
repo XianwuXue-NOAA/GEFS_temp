@@ -1,0 +1,46 @@
+#BSUB -J %E%gefs_chem_init_%CYC%
+#BSUB -o /com/output/%ENVIR%/today/gefs_chem_init_%CYC%.o%J
+#BSUB -cwd /tmp
+#BSUB -n 1
+#BSUB -R span[ptile=1]
+#BSUB -R 'affinity[core(1)]'
+#BSUB -q %QUEUE%
+#BSUB -W 00:30
+#BSUB -L /bin/sh
+#BSUB -P %PROJ%-%PROJENVIR%
+
+module purge
+
+%include <head.h>
+%include <envir-p35.h>
+set -x
+
+export model=gefs
+%include <model_ver.h>
+
+. /usrx/local/prod/lmod/lmod/init/ksh
+module load EnvVars/$EnvVars_ver
+module load ips/$ips_ver
+module load prod_util/$prod_util_ver
+module load prod_envir/$prod_envir_ver
+module load NCO/$NCO_ver
+module load python/$python_ver
+module load lsf/$lsf_ver
+
+module list
+
+# EXPORT list here
+ulimit -s unlimited
+ulimit -a
+
+
+export total_tasks=1
+export taskspernode=1
+
+# CALL executable job script here
+${HOMEgefs}/jobs/JGEFS_CHEM_INIT
+
+%include <tail.h>
+%manual
+# include manual page below
+%end

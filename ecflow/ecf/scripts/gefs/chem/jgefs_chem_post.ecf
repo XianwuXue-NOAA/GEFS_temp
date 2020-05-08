@@ -1,0 +1,53 @@
+#BSUB -J %E%gefs_chem_post_%CYC%
+#BSUB -o /com/output/%ENVIR%/today/gefs_chem_post_%CYC%.o%J
+#BSUB -cwd /tmp
+#BSUB -n 28
+#BSUB -R span[ptile=14]
+#BSUB -R 'affinity[core(1)]'
+#BSUB -q %QUEUE%
+#BSUB -W 03:00
+#BSUB -L /bin/sh
+#BSUB -P %PROJ%-%PROJENVIR%
+
+module purge
+
+%include <head.h>
+%include <envir-p35.h>
+set -x
+
+export model=gefs
+%include <model_ver.h>
+
+. /usrx/local/prod/lmod/lmod/init/ksh
+module load EnvVars/$EnvVars_ver
+module load ips/$ips_ver
+module load impi/$impi_ver
+module load prod_util/$prod_util_ver
+module load prod_envir/$prod_envir_ver
+module load grib_util/$grib_util_ver
+module load NetCDF/$NetCDF_ver
+module load HDF5-serial/$HDF5_serial_ver
+module load lsf/$lsf_ver
+module load g2tmpl/$g2tmpl_ver
+module load CFP/$CFP_ver
+export USE_CFP=YES
+
+module list
+
+# EXPORT list here
+ulimit -s unlimited
+ulimit -a
+
+export RUNMEM=geaer
+
+export total_tasks=28
+export taskspernode=14
+export FORECAST_SEGMENT=hr
+
+# CALL executable job script here
+${HOMEgefs}/jobs/JGEFS_ATMOS_POST
+
+%include <tail.h>
+%manual
+# include manual page below
+%end

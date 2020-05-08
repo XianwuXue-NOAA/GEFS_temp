@@ -1,0 +1,47 @@
+#BSUB -J %E%gefs_wave_init_%CYC%
+#BSUB -o /com/output/%ENVIR%/today/gefs_wave_init_%CYC%.o%J
+#BSUB -cwd /tmp
+#BSUB -n 24
+#BSUB -R span[ptile=24]
+#BSUB -R 'affinity[core(1)]'
+#BSUB -q %QUEUE%
+#BSUB -W 00:05
+#BSUB -L /bin/sh
+#BSUB -P %PROJ%-%PROJENVIR%
+
+module purge
+
+%include <head.h>
+%include <envir-p35.h>
+set -x
+
+export model=gefs
+%include <model_ver.h>
+
+. /usrx/local/prod/lmod/lmod/init/ksh
+module load EnvVars/$EnvVars_ver
+module load ips/$ips_ver
+module load impi/$impi_ver
+module load prod_util/$prod_util_ver
+module load prod_envir/$prod_envir_ver
+module load lsf/$lsf_ver
+module load CFP/$CFP_ver
+export USE_CFP=YES
+
+module list
+
+# EXPORT list here
+ulimit -s unlimited
+ulimit -a
+
+
+export total_tasks=24
+export taskspernode=24
+
+# CALL executable job script here
+${HOMEgefs}/jobs/JGEFS_WAVE_INIT
+
+%include <tail.h>
+%manual
+# include manual page below
+%end
