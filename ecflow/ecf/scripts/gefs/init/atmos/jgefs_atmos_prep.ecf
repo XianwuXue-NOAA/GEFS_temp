@@ -1,5 +1,6 @@
+#! /bin/ksh
 #BSUB -J %E%gefs_atmos_prep_%CYC%
-#BSUB -o /com/output/%ENVIR%/today/gefs_atmos_prep_%CYC%.o%J
+#BSUB -o %COM%/output/%ENVIR%/today/gefs_atmos_prep_%CYC%.o%J
 #BSUB -cwd /tmp
 #BSUB -n 40
 #BSUB -R span[ptile=40]
@@ -9,21 +10,20 @@
 #BSUB -L /bin/sh
 #BSUB -P %PROJ%-%PROJENVIR%
 
-module purge
+set -x
 
 %include <head.h>
 %include <envir-p35.h>
-set -x
 
 export model=gefs
 %include <model_ver.h>
 
 . /usrx/local/prod/lmod/lmod/init/ksh
+module use /gpfs/dell1/nco/ops/nwprod/modulefiles/compiler_prod
 module load EnvVars/$EnvVars_ver
 module load ips/$ips_ver
 module load impi/$impi_ver
 module load prod_util/$prod_util_ver
-module load prod_envir/$prod_envir_ver
 module load NetCDF/$NetCDF_ver
 module load lsf/$lsf_ver
 
@@ -33,6 +33,9 @@ module list
 ulimit -s unlimited
 ulimit -a
 
+export cyc=%CYC%
+export npert=2
+export navg_min=1
 export RUNMEM=ge%MEMBER%
 
 export total_tasks=1

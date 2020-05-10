@@ -1,19 +1,28 @@
+extern /prod18_1/gefs/post_processing
+extern /totality_limit:TOTALITY
 suite prod00_1
   repeat day 1
   edit ECF_TRIES '1'
+  edit ECF_HOME '/gpfs/dell2/emc/modeling/noscrub/Lin.Gan/ecflow-dell/submit'
   edit CYC '00'
-  edit ENVIR 'prod'
-  edit PROJ 'OPS'
+  edit MACHINE 'venus'
+  edit ENVIR 'test'
+  edit PROJ 'GFS'
   edit E 'j'
-  edit QUEUE 'prod'
-  edit PROJENVIR 'OPS'
-  edit MACHINE_SITE 'production'
+  #### Developer overwrite
+  edit ECF_INCLUDE '/gpfs/dell6/emc/modeling/noscrub/Lin.Gan/gefs-ecflow/gefs.v12.0.0/ecflow/ecf/include'
+  edit ECF_OUT '/gpfs/dell2/emc/modeling/noscrub/Lin.Gan/ecflow-dell/logs'
+  edit DATAROOT '/gpfs/dell6/stmp/Lin.Gan'
+  #### Developer overwrite
+  edit QUEUE 'dev'
+  edit QUEUESHARED 'dev_shared'
+  edit QUEUESERV 'dev_transfer'
+  edit ECF_JOB_CMD 'lsub %ECF_JOB% %ECF_JOBOUT% %MACHINE%'
+  inlimit /totality_limit:TOTALITY
   family gefs
-    edit ECF_FILES '/u/nwdev/emctest/scripts/gefs'
-    edit PROJ 'GEN'
-    edit QUEUESERV 'prod_transfer'
-    edit COM '/gpfs/dell1/nco/ops/com'
-    edit FILESYSTEM 'dell2'
+    edit ECF_FILES '/gpfs/dell6/emc/modeling/noscrub/Lin.Gan/gefs-ecflow/gefs.v12.0.0/ecflow/ecf/scripts/gefs'
+    edit PROJENVIR 'DEV'
+    edit COM '/gpfs/dell6/ptmp/Lin.Gan/o/nco/ops/com'
     family init
       family atmos
         task jgefs_atmos_getcfssst
