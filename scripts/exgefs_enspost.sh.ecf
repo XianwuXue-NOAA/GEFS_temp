@@ -418,9 +418,9 @@ if [ "$SENDCOM" = "YES" ]; then
 fi # [ "$SENDCOM" = "YES" ]
 
 #DHOU, 05/13/2015, added this block for gefs_cqpf trigger
-if [[ $SENDECF = "YES" ]]; then
-	ecflow_client --event enspost_grb2_ready
-fi
+#if [[ $SENDECF = "YES" ]]; then
+#	ecflow_client --event enspost_grb2_ready
+#fi
 
 #
 # create pqpf 24h and probabilistic precip forecast files
