@@ -119,7 +119,7 @@ cd $DATA
 if [ "$SENDDBN" = 'YES' ]
 then
     $DBNROOT/bin/dbn_alert MODEL GFS_BUFRSND_TAR $job \
-    $COMOUT/${RUNMEM}.${cycle}.bufrsnd.tar.gz
+    $COMOUT/bufr/${mem}/${RUNMEM}.${cycle}.bufrsnd.tar.gz
 fi
 
 ########################################
