@@ -1,9 +1,9 @@
-#! /bin/ksh
+#! /bin/sh
 #BSUB -J %E%gefs_atmos_gempak_%CYC%
 #BSUB -o %COM%/output/%ENVIR%/today/gefs_atmos_gempak_%CYC%.o%J
 #BSUB -cwd /tmp
-#BSUB -n 10
-#BSUB -R span[ptile=5]
+#BSUB -n 66
+#BSUB -R span[ptile=33]
 #BSUB -R "affinity[core(1):distribute=pack]"
 #BSUB -R "rusage[mem=4608]"
 #BSUB -q %QUEUE%_shared
@@ -26,7 +26,6 @@ module load ips/$ips_ver
 module load impi/$impi_ver
 module load prod_util/$prod_util_ver
 module load gempak/$gempak_ver
-module load lsf/$lsf_ver
 module load CFP/$CFP_ver
 export USE_CFP=YES
 
@@ -37,12 +36,10 @@ ulimit -s unlimited
 ulimit -a
 
 export cyc=%CYC%
-export npert=2
-export navg_min=1
 
-export total_tasks=10
+export total_tasks=66
 export OMP_NUM_THREADS=1
-export taskspernode=5
+export taskspernode=33
 
 # CALL executable job script here
 ${HOMEgefs}/jobs/JGEFS_ATMOS_GEMPAK

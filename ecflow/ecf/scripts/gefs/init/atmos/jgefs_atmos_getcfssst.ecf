@@ -1,4 +1,4 @@
-#! /bin/ksh
+#! /bin/sh
 #BSUB -J %E%gefs_atmos_getcfssst_%CYC%
 #BSUB -o %COM%/output/%ENVIR%/today/gefs_atmos_getcfssst_%CYC%.o%J
 #BSUB -cwd /tmp
@@ -31,8 +31,6 @@ ulimit -s unlimited
 ulimit -a
 
 export cyc=%CYC%
-export npert=2
-export navg_min=1
 
 export total_tasks=1
 export OMP_NUM_THREADS=1

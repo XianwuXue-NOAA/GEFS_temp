@@ -1,4 +1,4 @@
-#! /bin/ksh
+#! /bin/sh
 #BSUB -J %E%gefs_atmos_ensavg_nemsio_%CYC%
 #BSUB -o %COM%/output/%ENVIR%/today/gefs_atmos_ensavg_nemsio_%CYC%.o%J
 #BSUB -cwd /tmp
@@ -24,7 +24,6 @@ module load EnvVars/$EnvVars_ver
 module load ips/$ips_ver
 module load impi/$impi_ver
 module load prod_util/$prod_util_ver
-module load lsf/$lsf_ver
 module load CFP/$CFP_ver
 export USE_CFP=YES
 
@@ -35,8 +34,6 @@ ulimit -s unlimited
 ulimit -a
 
 export cyc=%CYC%
-export npert=2
-export navg_min=1
 
 export total_tasks=30
 export OMP_NUM_THREADS=1
