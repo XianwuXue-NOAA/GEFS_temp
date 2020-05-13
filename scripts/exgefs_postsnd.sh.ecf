@@ -76,17 +76,17 @@ do
 
     ic=0
 #   while [ $ic -lt 1000 ]
-    while [ $ic -lt 100 ]
+    while [ $ic -lt 900 ]
     do
         if [ ! -f $COMIN/sfcsig/${RUNMEM}.${cycle}.logf$FEND.nemsio ]
         then
-            sleep 10
+            sleep 5
             ic=$(expr $ic + 1)
         else
             break
         fi
 
-        if [ $ic -ge 360 ]
+        if [ $ic -ge 900 ]
         then
             err_exit "FATAL ERROR: COULD NOT LOCATE logf$FEND file AFTER 1 HOUR"
             err=-5

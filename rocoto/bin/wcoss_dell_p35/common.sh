@@ -51,20 +51,20 @@ elif [[ $RocotoGen == 1 ]]; then
     export SENDCOM=YES 
     #export cplwav=".true."
     #export warm_start=".false."
-    export KEEPDATA=YES     # ecflow NO
+    export KEEPDATA=NO     # ecflow NO
     export SENDECF=NO       # ecflow YES
-    export SENDDBN=NO       # ecflow YES
-    export SENDDBN_NTC=NO   # ecflow YES
+    export SENDDBN=YES       # ecflow YES
+    export SENDDBN_NTC=YES   # ecflow YES
 
-    export npert=2
-    export navg_min=1 
+    #export npert=2
+    #export navg_min=1 
     #export fhmax="840"
     #export fhrestart="48"
     ### For keep and arhive data
     #export KEEP_DIR="/gpfs/dell6/emc/modeling/noscrub/emc.enspara/Xianwu.Xue/GEFS/GEFSv12_Test02"
     #export HPSS_DIR="/NCEPDEV/emc-ensemble/2year/emc.enspara/Xianwu.Xue/GEFS_DELL35/GEFSv12_Test02"
-    export DIRS_TO_KEEP="bufr,ensstat,pgrb2sp25,pgrb2ap5,pgrb22p5,pgrb2p25,pgrb2bp5,cfssst,gempak,init"
-    export DIRS_TO_ARCHIVE="bufr,ensstat,pgrb2sp25,pgrb2ap5,pgrb22p5,pgrb2p25,pgrb2bp5,cfssst,gempak,init"
+    export DIRS_TO_KEEP="bufr,ensstat,pgrb2sp25,pgrb2ap5,pgrb22p5,pgrb2p25,pgrb2bp5,cfssst,gempak,init,wmo"
+    export DIRS_TO_ARCHIVE="bufr,ensstat,pgrb2sp25,pgrb2ap5,pgrb22p5,pgrb2p25,pgrb2bp5,cfssst,gempak,init,wmo"
     export DIRS_TO_KEEP_WAVE="gridded, station, restart, gempak"
     export DIRS_TO_ARCHIVE_WAVE="gridded, station, restart, gempak"
     export DIRS_TO_KEEP_CHEM="pgrb2ap50_aer,pgrb2ap25_aer,init,restart"
